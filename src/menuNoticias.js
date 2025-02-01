@@ -1,12 +1,21 @@
 import NoticiasContext from './NoticiasContext';
-import { Navbar, Nav, NavDropdown, Container} from "react-bootstrap";
-import { useContext } from 'react'
+import { Navbar, Nav, NavDropdown, Container, Button } from "react-bootstrap";
+import { useContext, useState } from "react";
 
 function MenuNoticias() {
-    const { noticias } = useContext(NoticiasContext);
+    const { noticias, filtrarNoticias } = useContext(NoticiasContext); 
+    const [busqueda, setBusqueda] = useState("");
+
+    const handleBusqueda = (e) => {
+        setBusqueda(e.target.value);
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        filtrarNoticias(busqueda); 
+    };
 
     return (
-
         <Navbar bg="light" expand="lg">
             <Container>
                 <Navbar.Brand href="#home">Noticias</Navbar.Brand>
@@ -28,10 +37,20 @@ function MenuNoticias() {
                             ))}
                         </NavDropdown>
                     </Nav>
+                    <form className="d-flex" onSubmit={handleSubmit}>
+                        <input
+                            type="text"
+                            placeholder="Buscar noticia"
+                            className="form-control me-2"
+                            value={busqueda}
+                            onChange={handleBusqueda}
+                        />
+                        <Button variant="outline-primary" type="submit">Buscar</Button>
+                    </form>
                 </Navbar.Collapse>
             </Container>
         </Navbar>
-    )
+    );
 }
 
 export default MenuNoticias;
