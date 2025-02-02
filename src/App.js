@@ -1,9 +1,8 @@
-
 import './App.css';
 import { BrowserRouter, Route, Routes } from "react-router";
-import ListaNoticias from "./ListaNoticias";
-import {NoticiasProvider } from "./NoticiasContext";
-
+import ListaNoticias from "./NewsList";
+import { NoticiasProvider } from "./NewsContext";
+import NewsDetails from "./NewsDetails";
 
 function App() {
   return (
@@ -11,6 +10,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<ListaNoticias />} />
+          <Route path="/NewsDetails/:filtro" element={<NewsDetails />} />
         </Routes>
       </BrowserRouter>
     </NoticiasProvider>
@@ -18,3 +18,4 @@ function App() {
 }
 
 export default App;
+
